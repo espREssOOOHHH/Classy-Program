@@ -1,2 +1,2 @@
-# Program-Linux
-First try on linux programming/一些linux小程序
+# Classy-Program
+Some small program on class/课堂上完成的一些作业小程序
