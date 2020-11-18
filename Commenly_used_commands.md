@@ -10,5 +10,11 @@
 
 3. Permission denied(publickey)
 
-`` sudo ssh-agent bash``
-``
+    ````
+    sudo ssh-agent bash
+    ssh-add -K lee /root/.ssh/id_rsa
+    
+    ````
+
+    
+
