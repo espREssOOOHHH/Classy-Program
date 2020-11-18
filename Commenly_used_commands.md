@@ -8,3 +8,7 @@
 
 `` sudo chown -R lee ./smallProgLinux `` 
 
+3. Permission denied(publickey)
+
+`` sudo ssh-agent bash``
+``
