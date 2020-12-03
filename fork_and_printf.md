@@ -209,7 +209,7 @@ root@ubuntu_wsl:~$ ./prog5
 root@ubuntu_wsl:~$ 
 ```
 
-##结论/CONCLUSION
+## 结论/CONCLUSION
 一个小小的问题让我又一次复习了C中一些基本库函数的原理，同时也对多进程编程有了更深一步的认识。
 
 
