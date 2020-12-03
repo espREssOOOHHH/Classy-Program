@@ -1,5 +1,6 @@
 # a common issue about fork() and printf()
 # 为什么会这样？从一个小程序谈unistd下的fork()和printf()
+<script src="mermaid.full.min.js"></script>
 
 ## 问题引出/PROBLEM LEADING
 今天课上，老师提出了这样一个问题：
@@ -26,7 +27,7 @@ int main()
 我们知道，fork()函数的工作原理可以简单[认为是](https://www.cnblogs.com/bastard/archive/2012/08/31/2664896.html)：当一个进程调用fork()函数后，系统先给新的进程分配资源，例如存储数据和代码的空间。然后把原来的进程的所有值都复制到新的新进程中，只有少数值与原来的进程的值不同。相当于克隆了一个自己。
 
 根据这个思路，我们可以画图分析以下程序运行的过程：
-```mermaid
+<div class="mermaid">
 graph TD
     01[pid=1,i=0]-->fork1{fork}
     fork1-->11[pid=1,i=0,printf&#40'='&#41]
@@ -37,7 +38,7 @@ graph TD
     fork2-->23[pid=3,i=1,printf&#40'='&#41]
     fork2s-->22[pid=2,i=1,printf&#40'='&#41]
     fork2s-->24[pid=4,i=1,printf&#40'='&#41]
-```
+</div>
 
 从图中可以看出，这个程序运行结束应该在终端打印六个等号。但是事实真的是这样吗？
 
@@ -143,7 +144,7 @@ printf这个函数并不会把要输出的内容立即打印到屏幕上，而�
 而这个例子中，由于fork()函数的[原理](https://www.geeksforgeeks.org/fork-system-call/)是把原来的进程的所有值都复制到新的进程中，父进程的IO缓冲区也不例外。而在prog3中，结尾的换行符\\n使得printf()函数强制刷新缓冲区，自然就不会多打印两次等号了。
 
 prog2程序的实际运行分析图如下：
-
+```mermaid
 graph TD
     01[pid=3411,i=0]-->fork1{fork}
     fork1-->11[pid=3411,i=0,打印内容:3411=:0]
@@ -154,7 +155,7 @@ graph TD
     fork2-->23[pid=3413,i=1,打印内容:3411=:0 3413=:0]
     fork2s-->22[pid=3412,i=1,打印内容:3412=:1]
     fork2s-->24[pid=3414,i=1,打印内容:3412=:0 3414=:1]
-
+```
 
 让我们来验证一下刚才的猜想！在prog4中，使用setbuf(stdout,NULL)语句关闭缓冲区。
 ```
