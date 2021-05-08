@@ -12,7 +12,8 @@
 
     ````
     sudo ssh-agent bash
-    ssh-add -K lee /root/.ssh/id_rsa
+    //ssh-add -K lee /root/.ssh/id_rsa 废弃
+    ssh-add /root/.ssh/id_rsa
     
     ````
 
