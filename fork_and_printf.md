@@ -39,6 +39,8 @@ graph TD
     fork2s-->24[pid=4,i=1,printf&#40'='&#41]
 ```
 
+![程序运行图--和上图相同](/assets/fork&printf/fork&printf_photo1.png)
+
 从图中可以看出，这个程序运行结束应该在终端打印六个等号。但是事实真的是这样吗？
 
 在WSL ubuntu 20.04LTS下调试运行prog1，结果如下所示
@@ -96,6 +98,8 @@ graph TD
     fork2s-->22[pid=3412,i=1]
     fork2s-->24[pid=3414,i=1]
 ```
+![程序运行图--和上图相同](/assets/fork&printf/fork&printf_photo2.png)
+
 为什么pid为3411、3412的两个进程在i=1时多打印了一次等号呢？
 
 假如把输出内容后加入一个换行符，那么新程序的运行结果是怎样的呢？让我们来调试一下。
@@ -155,7 +159,7 @@ graph TD
     fork2s-->22[pid=3412,i=1,打印内容:3412=:1]
     fork2s-->24[pid=3414,i=1,打印内容:3412=:0 3414=:1]
 ```
-
+![程序运行图--和上图相同](/assets/fork&printf/fork&printf_photo3.png)
 让我们来验证一下刚才的猜想！在prog4中，使用setbuf(stdout,NULL)语句关闭缓冲区。
 ```
 //prog4
